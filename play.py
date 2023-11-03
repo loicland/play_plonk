@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from math import radians, sin, cos, sqrt, asin, exp
 import argparse
+import pickle
 
 def haversine(lat1, lon1, lat2, lon2):
     if (lat1 is None) or (lon1 is None) or (lat2 is None) or (lon2 is None):
@@ -29,6 +30,8 @@ def haversine(lat1, lon1, lat2, lon2):
 def geoscore(d):
     return 5000 * exp(-d / 1492.7)
 
+
+
 class ImageSorter:
     def __init__(self, args, master, images, coordinates, admins):
         self.master = master
@@ -41,7 +44,6 @@ class ImageSorter:
         # Initialize the score and distance lists
         self.scores = []
         self.distances = []
-        
         self.clicked_locations = []
 
         master.title("Image Viewer")
@@ -75,6 +77,19 @@ class ImageSorter:
         # Textbox for distance display
         self.canvas_widget = self.canvas.get_tk_widget()
         self.canvas_widget.pack()
+        
+        #laod pickle - if it exists
+        state = self.load_game_state()
+        if state is not None:
+            self.index = state['index']
+            self.scores = state['scores']
+            self.distances = state['distances']
+            self.clicked_locations = state['clicked_locations']
+        else:
+            self.index = 0
+            self.scores = []
+            self.distances = []
+            self.clicked_locations = []
 
         # Load initial image
         self.load_image()
@@ -112,7 +127,7 @@ class ImageSorter:
     def on_map_click(self, event):
         if event.inaxes:  # Check if click was inside the axes
             click_lon, click_lat = event.xdata, event.ydata
-
+                        
             # Display true location and line
             self.display_true_location_and_line(click_lon, click_lat)
 
@@ -150,7 +165,9 @@ class ImageSorter:
                        "Press space")
         self.result_text_widget.insert('end', result_text)
         
-        self.master.bind('<KeyPress>', self.on_key_press)  
+        self.save_game_state(self.index+1, self.scores, self.distances, self.clicked_locations)
+
+        self.master.bind('<space>', self.on_key_press)  
     
     def on_key_press(self, event):
         # Go to the next image on any key press
@@ -214,6 +231,24 @@ class ImageSorter:
         self.average_text_widget.insert('end', exit_message)
         
         print(exit_message)
+        
+    # Function to save the game state
+    def save_game_state(self, index, scores, distances, clicked_locations):
+        with open('game_state.pkl', 'wb') as f:
+            pickle.dump({
+                'index': index,
+                'scores': scores,
+                'distances': distances,
+                'clicked_locations': clicked_locations
+            }, f)
+
+    # Function to load the game state
+    def load_game_state(self):
+        if os.path.exists('game_state.pkl'):
+            with open('game_state.pkl', 'rb') as f:
+                return pickle.load(f)
+        return None  # Return None or default values if the file does not exist
+    
         
     def exit_application(self):
         print("bye")

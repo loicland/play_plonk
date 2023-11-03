@@ -148,7 +148,7 @@ if __name__ == "__main__":
     if not os.path.exists(args.select_folder):
         os.makedirs(args.select_folder)
         
-    if False:
+    if True:
 
         images, coordinates = load_images_and_coordinates(args.csv_file, args.source_folder)
 
