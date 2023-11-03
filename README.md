@@ -16,6 +16,6 @@ python play.py
 - Press space to move to the next image
 - Total of 50 pictures
 - The final processing can take a little while, please be patient
-- I know it crashes at the end, I suck at GUIs, but please send me the text with the score
+- I know it crashes at the end, I suck at GUIs, but please send me the line with your score
 
 thanks :)
