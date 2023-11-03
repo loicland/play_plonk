@@ -236,7 +236,7 @@ def load_images_and_coordinates(csv_file):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Image Viewer with Map')
     parser.add_argument('--image_folder', type=str, required=False, help='Folder with images', default='./select')
-    parser.add_argument('--csv_file', type=str, required=False, help='CSV file with image ids and coordinates', default='/select.csv')
+    parser.add_argument('--csv_file', type=str, required=False, help='CSV file with image ids and coordinates', default='./select.csv')
 
     args = parser.parse_args()
        
