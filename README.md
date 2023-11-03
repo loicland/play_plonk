@@ -11,9 +11,10 @@ conda activate play_plonk_env
 python play.py
 ```
 
-- click on the map where you think the image was taken
-- press space to move to the next image
-- total of 50 pictures
-- final processing can take a little while, please be patient
+- Click on the map where you think the image was taken
+- Press space to move to the next image
+- Total of 50 pictures
+- The final processing can take a little while, please be patient
+- I know it crashes at the end, I suck at GUIs, but please send me the text with the score
 
 thanks :)
