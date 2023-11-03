@@ -103,7 +103,7 @@ class ImageSorter:
         self.ax.add_feature(cfeature.BORDERS, linestyle=':')
         
         self.result_text_widget.delete('1.0', tk.END)
-        self.result_text_widget.insert('end', "Click the map")
+        self.result_text_widget.insert('end', f"Image {self.index}/{len(self.images)}\nClick the map")
                
         self.canvas.draw()
         
