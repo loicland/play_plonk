@@ -2,8 +2,9 @@
 
 ### install
 ```
-conda create -n play_plonk_env python=3.9 pandas tk pillow cartopy matplotlib reverse_geocoder
+conda create -n play_plonk_env python=3.9 pandas tk pillow cartopy matplotlib 
 conda activate play_plonk_env
+conda install -c conda-forge reverse_geocoder
 ```
 
 ### play
