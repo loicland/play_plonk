@@ -230,7 +230,7 @@ def load_images_and_coordinates(csv_file):
     coordinates = df[['longitude', 'latitude']].values.tolist()
     admins = df[['city', 'area', 'region', 'country']].values.tolist()
 
-    return image_ids[:3], coordinates[:3], admins[:3]
+    return image_ids[:], coordinates[:], admins[:]
 
 
 if __name__ == "__main__":
